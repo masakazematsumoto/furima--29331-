@@ -62,7 +62,7 @@
 | purchaser | references | foreign_key:true,null: false | 
 
 ### Association
--has_one :purchaser
+-belongs_to :purchaser
 
 
 
