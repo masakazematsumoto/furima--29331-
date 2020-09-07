@@ -44,7 +44,6 @@
 | user | references | foreign_key: true,null: false |
 | item | references | foreign_key: true,null: false |
 
-
 ### Association
 -belongs_to :user
 -belongs_to :item
@@ -60,10 +59,9 @@
 | address | string | null: false |
 | building_name | string | |
 | phone_number | string | null: false |
+| purchaser | references | foreign_key:true,null: false | 
 
 ### Association
--has_one :user
--has_one :item
 -has_one :purchaser
 
 
