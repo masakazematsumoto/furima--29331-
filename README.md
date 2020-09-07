@@ -13,18 +13,16 @@
 | first_name |string | null: false |
 | family_name_kana | string | null: false |
 | first_name_kana | string | null: false |
-| birth_day | integer | null: false |
+| birth_day | date | null: false |
 
 ### Association
 - has_many :items
-- has_one :purchasers
-- has_one :addresses
+- has_many :purchasers
 
 ## Items テーブル
 
 | Column | Type | Options |
 |:----|:----|:----|
-| image | ActiveStorage | null: false |
 | name | string | null: false |
 | description | text | null: false |
 | category_id | integer | null: false |
@@ -33,40 +31,42 @@
 | prefecture_id | integer | null: false |
 | handling_time_id | integer | null: false |
 | price | integer | null: false |
-| references | foreign_key:true,null: false | |
+| user | references |foreign_key:true,null: false | |
 
 ### Association
--belongs_to :users
--has_one :purchasers
--has_many :addresses
+-belongs_to :user
+-has_one :purchaser
 
 ## Purchasers テーブル
 
 | Column | Type | Options |
 |:----|:----|:----|
-| references | foreign_key: true,null: false | |
-| references | foreign_key: true,null: false | |
+| user | references | foreign_key: true,null: false |
+| item | references | foreign_key: true,null: false |
+
 
 ### Association
--has_one :users
--has_one :items
--has_one :addresses
+-belongs_to :user
+-belongs_to :item
+-has_one :address
 
 ## Addresses テーブル
 
 | Column | Type | Options |
 |:----|:----|:----|
 | post_code | string | null: false |
-| prefecture | integer | null: false |
+| prefecture_id | integer | null: false |
 | city |string | null: false |
 | address | string | null: false |
 | building_name | string | |
 | phone_number | string | null: false |
 
 ### Association
--has_one :users
--has_one :items
--has_one :purchasers
+-has_one :user
+-has_one :item
+-has_one :purchaser
+
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
