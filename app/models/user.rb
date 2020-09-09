@@ -15,7 +15,10 @@ class User < ApplicationRecord
     validates :birth_day
   end
 
-  validates :email, presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX }
+                    
   validates :encrypted_password, presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i ,message: "doesn't match Password"}, length: { minimum: 6 }
 
 end
