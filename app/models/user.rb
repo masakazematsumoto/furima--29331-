@@ -10,8 +10,8 @@ class User < ApplicationRecord
     validates :nickname
     validates :family_name, format: { with: /\A[ぁ-んァ-ン一-龥]/ ,message: "is Full-width characters"}
     validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥]/ ,message: "is Full-width characters"}
-    validates :family_name_kana, format: { with: /\A[ぁ-んァ-ン一-龥]/ ,message: "is Full-width characters"}
-    validates :first_name_kana, format: { with: /\A[ぁ-んァ-ン一-龥]/ ,message: "is Full-width characters"}
+    validates :family_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ ,message: "is Full-width characters"}
+    validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ ,message: "is Full-width characters"}
     validates :birth_day
   end
 
@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX }
                     
-  validates :encrypted_password, presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i ,message: "doesn't match Password"}, length: { minimum: 6 }
+  validates :password, presence: true,format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i ,message: "please type using half-width characters
+    "}, length: { minimum: 6 }
 
 end
