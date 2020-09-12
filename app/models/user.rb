@@ -8,10 +8,14 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :nickname
-    PASSWORD_REGEX1 = validates :family_name, format: { with: /\A[ぁ-んァ-ン一-龥]/ ,message: "is Full-width characters"}
-    PASSWORD_REGEX2 = validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥]/ ,message: "is Full-width characters"}
-    PASSWORD_REGEX3 = validates :family_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ ,message: "is Full-width characters"}
-    PASSWORD_REGEX4 = validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ ,message: "is Full-width characters"}
+    PASSWORD_REGEX1 = /\A[ぁ-んァ-ン一-龥]/
+    validates :family_name, format: { with: PASSWORD_REGEX1 ,message: "is Full-width characters"}
+    PASSWORD_REGEX2 = /\A[ぁ-んァ-ン一-龥]/
+    validates :first_name, format: { with: PASSWORD_REGEX2 ,message: "is Full-width characters"}
+    PASSWORD_REGEX3 = /\A[ァ-ヶー－]+\z/
+    validates :family_name_kana, format: { with: PASSWORD_REGEX3 ,message: "is Full-width characters"}
+    PASSWORD_REGEX4 = /\A[ァ-ヶー－]+\z/
+    validates :first_name_kana, format: { with: PASSWORD_REGEX4 ,message: "is Full-width characters"}
     validates :birth_day
   end
 
