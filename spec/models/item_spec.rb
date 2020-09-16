@@ -12,11 +12,7 @@ describe Item do
       it "image, name, description, category_id, condition_id, postage_id, prefecture_id, handling_time_id, priceが存在すれば保存できること" do
         expect(@item).to be_valid
       end
-
-      it "priceが半角数字なら保存できる" do
-        @item.price = "1000"
-        expect(@item).to be_valid
-      end
+    end
 
 
     context "商品出品情報の登録がうまくいかないとき" do
@@ -134,3 +130,6 @@ describe Item do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Half-width number", "Price Out of setting range")
       end
+    end
+  end
+end
