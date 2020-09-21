@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :category
   belongs_to_active_hash :condition
   belongs_to_active_hash :postage
-  belongs_to_active_hash :handlingtime
+  belongs_to_active_hash :handling_time
 
   has_one_attached :image
 
