@@ -5,15 +5,17 @@ class OrdersController < ApplicationController
 
   def create
     @item = Item.find(params[:item_id])
-    @order = Order.new(price: order_params[:price])
+    @order = OrderDonation.all( order_params )
+    @order.save
   end
 
   private
 
   def order_params
-    params.permit(:price, :token)
+    params.permit(:price, :post_code, :prefecture_id, :city, :address, :building_name, :phone_number, :purchaser, :token )
+    params.require(:order_donation).permit(:post_code, :city, :address, :phone_number, :prefecture_id )
   end
-
+  
   def pay_item
     @item = Item.find(params[:item_id])
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # PAY.JPテスト秘密鍵
@@ -29,4 +31,3 @@ class OrdersController < ApplicationController
     params.require(:item).permit(:name, :price, :image).merge(user_id: current_user.id)
   end
 end
-
