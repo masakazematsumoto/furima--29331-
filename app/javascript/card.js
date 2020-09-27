@@ -8,7 +8,7 @@ const pay = () => {
   const formResult = document.getElementById("charge-form");
   const formData = new FormData(formResult);
 
-  const card = { // カードオブジェクトを生成
+  const credit-card-form = { // カードオブジェクトを生成
       number: formData.get("order_donation[number]"),              // カード番号
       cvc: formData.get("order_donation[cvc]"),                    // カード裏面の3桁の数字
       exp_month: formData.get("order_donation[exp_month]"),        // 有効期限の月
