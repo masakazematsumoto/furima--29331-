@@ -8,14 +8,14 @@ const pay = () => {
   const formResult = document.getElementById("charge-form");
   const formData = new FormData(formResult);
 
-  const credit-card-form = { // カードオブジェクトを生成
+  const creditCardForm = { // カードオブジェクトを生成
       number: formData.get("order_donation[number]"),              // カード番号
       cvc: formData.get("order_donation[cvc]"),                    // カード裏面の3桁の数字
       exp_month: formData.get("order_donation[exp_month]"),        // 有効期限の月
       exp_year: `20${formData.get("order_donation[exp_year]")}`,   // 有効期限の年
     };
     //debugge
-    Payjp.createToken(card, (status, response) => {
+    Payjp.createToken(creditCardForm, (status, response) => {
       if (status === 200) {
         const token = response.id;
         const renderDom = document.getElementById("charge-form");   //idを元に要素を取得
