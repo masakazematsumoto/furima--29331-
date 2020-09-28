@@ -31,7 +31,7 @@ const pay = () => {
         document.getElementById("charge-form").reset();
       }   
       else {
-        render 'shared/error_messages', model: f.object
+        render ,'shared/error_messages', model: f.object
       }
     });
   });
