@@ -10,9 +10,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    
     @order = OrderDonation.new(order_params)
-
     if @order.valid?
       @order.save
       redirect_to root_path
