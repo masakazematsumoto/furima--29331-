@@ -1,11 +1,16 @@
 class OrdersController < ApplicationController
+  before_action :set_order, only: [:index, :create, :pay_item, ]
+
   def index
-    @item = Item.find(params[:item_id])
     @order = OrderDonation.new
+
+    if user_signed_in? && current_user.id == @item.user_id
+      redirect_to root_path
+    end
   end
 
   def create
-    @item = Item.find(params[:item_id])
+    
     @order = OrderDonation.new(order_params)
 
     if @order.valid?
@@ -19,12 +24,12 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    #params.permit(:price, :post_code, :prefecture_id, :city, :address, :building_name, :phone_number, :purchaser, :token )
+    
     params.require(:order_donation).permit(:post_code, :city, :address, :building_name, :phone_number, :prefecture_id ).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:card_token])
   end
   
   def pay_item
-    @item = Item.find(params[:item_id])
+    
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # PAY.JPテスト秘密鍵
     Payjp::Charge.create(
       amount: @item.price,  # 商品の値段
@@ -37,5 +42,10 @@ class OrdersController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :price, :image).merge(user_id: current_user.id)
   end
+
+  def set_order
+    @item = Item.find(params[:item_id])
+  end
+
 end
 

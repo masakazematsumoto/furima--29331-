@@ -68,6 +68,18 @@ describe OrderDonation do
       @order_donation.valid?
       expect(@order_donation.errors.full_messages).to include("Phone number is not a number")
       end
+
+      it "prefecture_idをid:0を選択していると保存できない" do
+        @order_donation.prefecture_id= "0"
+        @order_donation.valid?
+        expect(@order_donation.errors.full_messages).to include("Prefecture can't be blank")
+      end
+
+      it "phone_numberが12桁以上だと保存できない"do
+        @order_donation.phone_number = '090123456789'
+        @order_donation.valid?
+        expect(@order_donation.errors.full_messages).to include()
+      end
     end
 
     end
