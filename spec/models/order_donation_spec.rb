@@ -70,7 +70,7 @@ describe OrderDonation do
       end
 
       it "prefecture_idをid:0を選択していると保存できない" do
-        @order_donation.prefecture_id= "0"
+        @order_donation.prefecture_id= 0
         @order_donation.valid?
         expect(@order_donation.errors.full_messages).to include("Prefecture can't be blank")
       end
