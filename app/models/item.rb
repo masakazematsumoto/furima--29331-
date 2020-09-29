@@ -10,7 +10,8 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
-  validates :category_id, :condition_id, :postage_id, :prefecture_id, :handling_time_id, numericality: { other_than: 1, message: "can't be blank" } 
+  validates :category_id, :condition_id, :postage_id, :handling_time_id, numericality: { other_than: 1, message: "can't be blank" } 
+  validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
 
   with_options presence: true do
     validates :image
@@ -19,3 +20,4 @@ class Item < ApplicationRecord
     validates :price, format: {with: /\A[0-9]+\z/, message: "is invalid. Input half-width characters."}, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999}
   end
 end
+
