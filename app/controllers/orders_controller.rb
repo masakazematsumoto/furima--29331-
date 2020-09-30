@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:index, :create, :pay_item, ]
+  before_action :set_cocoa
 
   def index
     @order = OrderDonation.new
@@ -8,6 +9,7 @@ class OrdersController < ApplicationController
       redirect_to root_path
     end
   end
+
 
   def create
     @order = OrderDonation.new(order_params)
@@ -21,13 +23,18 @@ class OrdersController < ApplicationController
 
   private
 
+def set_cocoa
+  if user_signed_in? && current_user.id != @item.user_id && @item.purchaser != nil
+    redirect_to root_path
+  end
+end
+
   def order_params
-    
     params.require(:order_donation).permit(:post_code, :city, :address, :building_name, :phone_number, :prefecture_id ).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:card_token])
+    # params.permit(:post_code, :city, :address, :building_name, :phone_number, :prefecture_id ).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:card_token])
   end
   
   def pay_item
-    
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # PAY.JPテスト秘密鍵
     Payjp::Charge.create(
       amount: @item.price,  # 商品の値段

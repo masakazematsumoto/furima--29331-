@@ -19,7 +19,7 @@ const pay = () => {
       if (status === 200) {
         const token = response.id;
         const renderDom = document.getElementById("charge-form");   //idを元に要素を取得
-        const tokenObj = `<input value=${token} type="hidden" name='authenticity_token'>`;   //paramsの中にトークンを含める
+        const tokenObj = `<input value=${token} type="hidden" name='order_donation[token]'>`;   //paramsの中にトークンを含める
         renderDom.insertAdjacentHTML("beforeend", tokenObj);  //フォームの一番最後に要素を追加
       }
         document.getElementById("card-number").removeAttribute("name");
