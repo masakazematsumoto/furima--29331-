@@ -6,7 +6,7 @@ class OrderDonation
   validates :prefecture_id, numericality: { other_than: 0, message: "can't be blank" }
 
   with_options presence: true do
-    #validates :token
+    validates :token
     validates :post_code, format: { with: /\A\d{3}[-]\d{4}\z/ }
     validates :city
     validates :address

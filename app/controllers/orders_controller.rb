@@ -1,10 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:index, :create, :pay_item, ]
+  before_action :set_order, only: [:index, :create, :pay_item, :set_cocoa ]
   before_action :set_cocoa
 
   def index
     @order = OrderDonation.new
-
     if user_signed_in? && current_user.id == @item.user_id
       redirect_to root_path
     end
@@ -12,8 +11,10 @@ class OrdersController < ApplicationController
 
 
   def create
+    
     @order = OrderDonation.new(order_params)
     if @order.valid?
+      pay_item
       @order.save
       redirect_to root_path
     else
@@ -30,7 +31,7 @@ def set_cocoa
 end
 
   def order_params
-    params.require(:order_donation).permit(:post_code, :city, :address, :building_name, :phone_number, :prefecture_id ).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:card_token])
+    params.require(:order_donation).permit(:post_code, :city, :address, :building_name, :phone_number, :prefecture_id, :token).merge(item_id: params[:item_id], user_id: current_user.id )
     # params.permit(:post_code, :city, :address, :building_name, :phone_number, :prefecture_id ).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:card_token])
   end
   
