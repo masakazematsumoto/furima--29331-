@@ -63,28 +63,33 @@
 ### Association
 -belongs_to :purchaser
 
+・GitHub
+　https://github.com/masakazematsumoto/furima--29331-.git
 
+・huloku
+　https://furima-29331.herokuapp.com/
+　Herokuでデプロイしているため、Herokuの仕様により本番環境にアクセス頂いた際に画像リンクが切れている可能性がございます。 
+・basic認証
+　username == 'cocoa'
+　password == '29331'
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+・Rubyバージョン
+   ruby 2.6.5p114
 
-Things you may want to cover:
+・フリーマーケットアプリ
+　誰でも商品を出品でき、他社が出品した商品を購入できる。
+　作成期間 2020/9/3~2020/10/1
 
-* Ruby version
+・主な使用言語
+　Ruby
 
-* System dependencies
+・ 機能紹介
+　商品を出品し、購入できる。
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
+・テスト用アカウント等
+　購入者用 　　メールアドレス: vvv@sample.com 　　パスワード: cocoa1234 　購入用カード情報 　　番号：4242424242424242 　セキュリティコード：123 　
+　出品者用 　　メールアドレス: zzz@sample.com 　　パスワード: cocoa7777 
+ 
+・追加実装
+ 画像プレビュー表示機能
+ エラーメセージ日本語化
